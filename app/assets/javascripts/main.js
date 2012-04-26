@@ -3,6 +3,10 @@ var answer = 0;
 var done = false;
 var highScores = new Array([9, "HarryJamesPotter"], [3, "ZedCthulhu"], [2, "NearlyDied"]);
 
+jQuery.ajaxSetup({
+	'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
+})
+
 $(function() {
 	updateScore(guessesLeft);
 	generateNumberToGuess();
@@ -39,6 +43,7 @@ function theGuess() {
 		}
 		if (guess == answer) {
 			var name = prompt("Enter your name for high scores: ", "Anonymous");
+			$.post($(this).attr("action"), $(this).serialize(), null, "script")
 			if( name != null ){ highScores.push([guessesLeft, name]); }
 			populateHighScores(highScores);
 			$("#end_game_text").airport([ "You have outsmarted the zombies!",  "Play again?", "You have won!" ]);
