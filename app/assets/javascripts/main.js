@@ -4,16 +4,18 @@ var done = false;
 var highScores = [];
 
 $.ajax({
-	url: '/high_scores/',
+	url: '/high_score/',
 	success: function(data) {
 		highScores = data;
+		highScores.push(["answer", answer]);
+		populateHighScores(highScores);
 	}
 });
-
 $(function() {
 	updateScore(guessesLeft);
 	generateNumberToGuess();
-	populateHighScores(highScores);
+	//alert(highScores[0]);
+
 });
 
 function populateHighScores(scores) {
@@ -48,17 +50,14 @@ function theGuess() {
 			var name = prompt("Enter your name for high scores: ", "Anonymous");
 			$.post($(this).attr("action"), $(this).serialize(), null, "script")
 			$.ajax({
-				url: "/high_scores/",
+				url: "/high_score/",
 				type: "POST",
-				data:{high_score:{name:name, score:guessesleft}},
+				data:{high_score:{name:name, score:guessesLeft}},
 				success: function(data) {
 					highScores.push(data);
 					populateHighScores(highScores);
 				}
 			});
-				
-			high_score
-			populateHighScores(highScores);
 			$("#end_game_text").airport([ "You have outsmarted the zombies!",  "Play again?", "You have won!" ]);
 			doEndGame();
 		} else {
