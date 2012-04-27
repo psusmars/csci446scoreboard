@@ -7,7 +7,6 @@ $.ajax({
 	url: '/high_score/',
 	success: function(data) {
 		highScores = data;
-		highScores.push(["answer", answer]);
 		populateHighScores(highScores);
 	}
 });
@@ -23,7 +22,7 @@ function populateHighScores(scores) {
 	//Sort the array by score
 	scores.sort(SortByScore);
 	for (var i = 0; i < scores.length; ++i) {
-		$('div#highScores').append("<p>" + scores[i][0] + " " + scores[i][1] + "</p>");
+		$('div#highScores').append("<p>" + scores[i].name + " " + scores[i].score + "</p>");
 	}
 }
 
