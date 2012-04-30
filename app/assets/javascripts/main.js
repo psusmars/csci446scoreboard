@@ -78,8 +78,8 @@ function theGuess() {
 }
 
 function SortByScore(x, y) {
-	var xScore = x[0];
-	var yScore = y[0];
+	var xScore = x.score;
+	var yScore = y.score;
 	if(xScore == yScore) 
 	{
 		return 0;
